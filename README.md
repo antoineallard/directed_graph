@@ -11,6 +11,7 @@ The class can be imported directly and is available under the namepace `pgl`.
 
 The currently available functionalities are
 * [Importing a graph from an edgelist file](#importing-a-graph-from-an-edgelist-file)
+* [Loading vertices properties](#loading-vertices-properties)
 * [Number of vertices and edges](#number-of-vertices-and-edges)
 * [In-degrees and out-degrees](#in-degrees-and-out-degrees)
 * [Reciprocity](#reciprocity)
@@ -42,7 +43,35 @@ Note that the vertices' name will be imported as `std::string` and can therefore
 
 ```c++
 // The graph is loaded at the initialization of the class
-pgl::directed_graph_t g(""<path-to-edgelist-file>"");
+pgl::directed_graph_t g("<path-to-edgelist-file>");
+```
+
+
+#### Loading vertices properties
+
+Vertex properties can be loaded from a text file in order to be used by the code (one vertex per line). These text file must follow the following convention
+
+```python
+# lines beginning with "#" are ignored (comments).
+# note that vertices' name must be separated by at least one white space.
+# there may be white space at the beginning of a line.
+[name_of_vertex_1]  [value_for_property1]  [value_for_property2] [value_for_property3]
+[name_of_vertex_2]  [value_for_property1]  [value_for_property2] [value_for_property3]
+[name_of_vertex_3]  [value_for_property1]  [value_for_property2] [value_for_property3]
+# comments can be inserted between edges
+[name_of_vertex_4]  [value_for_property1]  [value_for_property2] [value_for_property3]
+[name_of_vertex_5]  [value_for_property1]  [value_for_property2] [value_for_property3]
+...
+```
+
+
+```c++
+load_vertices_properties("<path-to-file>",    // name of the property file to read
+                         <column_number>,     // column in the file which corresponds to the property to read (column 0 correspsonds to the names)
+                         "<internal_name>",   // internal name of the property (used to access the property via v_prop["<internal_name>"])
+                         "<output_name>",     // default header name to use when using save_vertices_properties() (uses "<internal_name>" if not provided)
+                         <bool>)              // indicate whether a vertex found in the property file that is not already in the graph should be
+                                              // added as a vertex with degree 0 (default: true).
 ```
 
 
@@ -70,7 +99,7 @@ std::vector<double>& Vertex2OutDegree = g.v_prop["out-degree"];
 // The joint in-/out-degree distribution can be written into a text file via
 std::string p[] = {"in-degree", "out-degree"};
 std::vector<std::string> props(p, p+2);
-g.save_vertices_properties("<output_filename>",            // name of the file to write into
+g.save_vertices_properties("<output_filename>",                // name of the file to write into
                            props,                              // std::vector<string> with the keywords of the vertex properties
                            pgl::directed_graph_t::vID_name,    // indicates whether vertices should be identified or not (adds a column)
                                                                //   - directed_graph_t::vID_name (default): names in the original edgelist
