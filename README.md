@@ -82,6 +82,8 @@ g.load_vertices_properties("<path-to-file>",   // name of the property file to r
 // The number of vertices/edges in the graph are accessible via
 int nb_vertices = g.g_prop["nb_vertices"];
 int nb_edges = g.g_prop["nb_edges"];
+// The density of the graph is accessible via
+double density = g.g_prop["density"]
 ```
 
 
