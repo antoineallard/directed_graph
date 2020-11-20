@@ -1,6 +1,6 @@
 ## Directed graph
 
-The `directed_graph_t` class offers many methods to analyze the structure of **directed, unweighted and simple graph without self-loops**.
+The `directed_graph_t` class offers many methods to analyze the structure of **simple unweighted directed graph without self-loops**.
 
 
 The class can be imported directly and is available under the namepace `pgl`.
@@ -9,13 +9,15 @@ The class can be imported directly and is available under the namepace `pgl`.
 #include "src/directed_graph_t.hpp"
 ```
 
-The currently available functions are
+The currently available functionalities are
 * [Importing a graph from an edgelist file](#importing-a-graph-from-an-edgelist-file)
 * [Number of vertices and edges](#number-of-vertices-and-edges)
 * [In-degrees and out-degrees](#in-degrees-and-out-degrees)
 * [Reciprocity](#reciprocity)
+* [List of triangles](#list-of-triangles)
+* [Spectrum of unique triangle configurations](#spectrum-of-unique-triangle-configurations)
 
-Note that further examples on how to use `edgelist_perco_t` are also provided in a [notebook](https://github.com/antoineallard/percolation_on_edgelist/blob/main/validation/plot_validation_figures.ipynb) (see also related scripts in [`validation/`](https://github.com/antoineallard/percolation_on_edgelist/tree/main/validation)) used to validate the class.
+Note that further examples on how to use `directed_graph_t` are also provided in a notebook (see also related scripts in `validation/`) used to validate the class.
 
 
 #### Importing a graph from an edgelist file
@@ -33,12 +35,9 @@ A graph can be imported from a file containing its edgelist (one edge per line).
 [name of source vertex]  [name of target vertex]  [ignores the rest]
 [name of source vertex]  [name of target vertex]  [ignores the rest]
 ...
-
-# where the vertices's name will be imported as std::string and can therefore
-#  e virtually anything as long as they do not include white spaces (i.e.,
-#  there is not need for the vertices to be identified by contiguous
-#  integers).
 ```
+Note that the vertices' name will be imported as `std::string` and can therefore be virtually anything as long as they do not include white spaces (i.e., there is not need for the vertices to be identified by contiguous integers).
+
 **IMPORTANT**: this class only considers simple directed graphs without self-loops. Any multiple edges or self-loops will be ignored.
 
 ```c++
