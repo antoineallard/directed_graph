@@ -67,12 +67,12 @@ Vertex properties can be loaded from a text file in order to be used by the code
 
 ```c++
 // Loads a vertex property.
-g.load_vertices_properties("<path-to-file>",  // name of the property file to read
-                          <column_number>,    // column in the file which corresponds to the property to read (column 0 correspsonds to the names)
-                          "<internal_name>",  // internal name of the property (used to access the property via v_prop["<internal_name>"])
-                          "<output_name>",    // default header name to use when using save_vertices_properties() (uses "<internal_name>" if not provided)
-                          <bool>)             // indicate whether a vertex found in the property file that is not already in the graph should be
-                                              // added as a vertex with degree 0 (default: true).
+g.load_vertices_properties("<path-to-file>",   // name of the property file to read
+                           <column_number>,    // column in the file which corresponds to the property to read (column 0 correspsonds to the names)
+                           "<internal_name>",  // internal name of the property (used to access the property via v_prop["<internal_name>"])
+                           "<output_name>",    // default header name to use when using save_vertices_properties() (uses "<internal_name>" if not provided)
+                           <bool>)             // indicate whether a vertex found in the property file that is not already in the graph should be
+                                               // added as a vertex with degree 0 (default: true).
 ```
 
 
