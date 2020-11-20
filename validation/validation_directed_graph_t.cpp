@@ -34,7 +34,7 @@
  #include <fstream>
  #include <string>
  // Portable graph library
- #include "../../src_cpp/directed_graph_t.hpp"
+ #include "../src/directed_graph_t.hpp"
 
 
  int main(int argc, char const *argv[])

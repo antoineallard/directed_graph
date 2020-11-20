@@ -33,7 +33,7 @@ edgelist_filename = sys.argv[1]
 
 # Loads the edgelist using networkx and makes it a simple directed graph without self-loops.
 g_dir = nx.read_edgelist(edgelist_filename, create_using=nx.DiGraph())
-g_dir.remove_edges_from(g_dir.selfloop_edges())
+g_dir.remove_edges_from(nx.selfloop_edges(g_dir))
 g_dir.remove_nodes_from([v for v in nx.isolates(g_dir)])
 
 # Creates an undirected version of the graph.

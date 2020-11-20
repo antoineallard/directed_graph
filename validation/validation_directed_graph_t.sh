@@ -24,24 +24,24 @@
 
 # Compiles the PGL file.
 echo -en "\nCompiling cpp/validation_directed_graph_t.cpp..."
-g++ -O3 cpp/validation_directed_graph_t.cpp -o validation_directed_graph_t
+g++ -O3 validation_directed_graph_t.cpp -o validation_directed_graph_t
 echo -e "done.\n"
 
-edgelist_filenames=("../assets/edgelists/example01.edge" \
-                    "../assets/edgelists/example03.edge"
-                    "../assets/edgelists/example04.edge"
-                    "../assets/edgelists/example05.edge"
-                    "../assets/edgelists/example06.edge"
-                    "../assets/edgelists/example07.edge"
-                    "../assets/edgelists/example08.edge"
-                    "../assets/edgelists/example09.edge")
+edgelist_filenames=("edgelists/example01.edge" \
+                    "edgelists/example03.edge"
+                    "edgelists/example04.edge"
+                    "edgelists/example05.edge"
+                    "edgelists/example06.edge"
+                    "edgelists/example07.edge"
+                    "edgelists/example08.edge"
+                    "edgelists/example09.edge")
 
 echo "Validating directed_graph_t using:"
 # for file in $edgelist_filenames; do
 for file in "${edgelist_filenames[@]}"; do
     echo -n "   using file: "$file
     echo -n "   Extacting info using NetworkX..."
-    python3 python/validation_directed_graph_t.py $file
+    python3 validation_directed_graph_t.py $file
     echo -n "done.    Extracting info using PGL..."
     ./validation_directed_graph_t $file
     echo -n "done.    Comparing outputs..."
