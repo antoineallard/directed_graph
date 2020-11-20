@@ -11,8 +11,9 @@ The class can be imported directly and is available under the namepace `pgl`.
 
 The currently available functions are
 * [Importing a graph from an edgelist file](#importing-a-graph-from-an-edgelist-file)
-* [Generating one instance of a bond percolated graph](#generating-one-instance-of-a-bond-percolated-edgelist)
-* [Properties of the percolated graph](#properties-of-the-percolated-edgelist)
+* [Number of vertices and edges](#number-of-vertices-and-edges)
+* [In-degrees and out-degrees](#in-degrees-and-out-degrees)
+* [Reciprocity](#reciprocity)
 
 Note that further examples on how to use `edgelist_perco_t` are also provided in a [notebook](https://github.com/antoineallard/percolation_on_edgelist/blob/main/validation/plot_validation_figures.ipynb) (see also related scripts in [`validation/`](https://github.com/antoineallard/percolation_on_edgelist/tree/main/validation)) used to validate the class.
 
@@ -43,4 +44,97 @@ A graph can be imported from a file containing its edgelist (one edge per line).
 ```c++
 // The graph is loaded at the initialization of the class
 pgl::directed_graph_t g(""<path-to-edgelist-file>"");
+```
+
+
+#### Number of vertices and edges
+
+```c++
+// The number of vertices/edges in the graph are accessible via
+int nb_vertices = g.g_prop["nb_vertices"];
+int nb_edges = g.g_prop["nb_edges"];
+```
+
+
+#### In-degrees and out-degrees
+
+```c++
+// Computes the in-/out-degree of vertices.
+g.degrees();
+
+// This function activates the two vertex property (v_prop) keywords
+//   "in-degree" and "out-degree", which give access to std::vector<double>
+//  objects.
+std::vector<double>& Vertex2InDegree = g.v_prop["in-degree"];
+std::vector<double>& Vertex2OutDegree = g.v_prop["out-degree"];
+
+// The joint in-/out-degree distribution can be written into a text file via
+std::string p[] = {"in-degree", "out-degree"};
+std::vector<std::string> props(p, p+2);
+g.save_vertices_properties("<output_filename>",            // name of the file to write into
+                           props,                              // std::vector<string> with the keywords of the vertex properties
+                           pgl::directed_graph_t::vID_name,    // indicates whether vertices should be identified or not (adds a column)
+                                                               //   - directed_graph_t::vID_name (default): names in the original edgelist
+                                                               //   - directed_graph_t::vID_num: contiguous integer ID
+                                                               //   - directed_graph_t::vID_none: does not identify the vertices (no additional column)
+                           15,                                 // column width (default_column_width = 15)
+                           pgl::directed_graph_t::header_true  // indicates whether a header should be added to identify the columns
+                                                               //   - header_true (default)
+                                                               //   - header_false
+                          );  // NOTE: The last three parameters can be omitted or provided in any order.
+```
+
+
+#### Reciprocity
+
+```c++
+// Computes the number of reciprocal edges and the reciprocity coefficient
+//   (the latter is returned by the function).  An edge is reciprocal is an
+//   edge running in the opposite direction exists. There is therefore an even
+//   number of reciprocal edges. The reciprocity coefficient is defined as the
+//   fraction of edges that are reciprocal.
+double reciprocity = g.reciprocity();
+
+// Calling this function activates the g_prop keywords "nb_reciprocal_edges"
+//   and "reciprocity".
+int nb_reciprocal_edges = g.g_prop["nb_reciprocal_edges"];
+reciprocity = g.g_prop["reciprocity"];
+```
+
+
+#### List of triangles
+
+```c++
+// Surveys the graph and builds a list of every triangles. In directed graphs,
+//   triangles are any group of 3 vertices connected by 3 edges independently
+//   of their direction.
+g.survey_triangles();
+
+// Doing so activates the graph property keyword "nb_triangles"
+int nb_triangles = g.g_prop["nb_triangles"];
+
+// The list of triangles is a  of dimensions
+//   nb_triangles x 3. It can be accessed via
+std::vector< std::vector<int> >& list_of_triangles = g.triangles;
+```
+
+
+#### Spectrum of unique triangle configurations
+
+```c++
+// The number of each 7 unique triangle configurations is extracted via
+g.triangle_spectrum();
+
+// The histogram can be accessed via
+std::map<std::string, int>& triangle_spect = g.triangle_spect;
+
+// The 7 unique triangle configurations are
+// "3cycle":   A  -> B  -> C  -> A
+// "3nocycle": A  -> B  -> C <-  A
+// "4cycle":   A <-> B  -> C  -> A
+// "4outward": A <-> B  -> C <-  A
+// "4inward":  A <-> B <-  C  -> A
+// "5cycle":   A <-> B <-> C  -> A
+// "6cycle":   A <-> B <-> C <-> A
+// The 20 remaining possible triangles are automorphisms of these 7 configurations.
 ```
