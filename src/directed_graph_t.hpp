@@ -175,17 +175,17 @@ namespace pgl
       directed_graph_t() { initialization(); };
       // Constructor with edgelist.
       directed_graph_t(std::string edgelist_filename) { initialization(); load_graph_from_edgelist_file(edgelist_filename); };
-      // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-      // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-      // Convert to python.
-      public:
-        // Graph properties.
-        int get_nb_vertices();
-        int get_nb_edges();
-        int get_nb_reciprocal_edges();
-        double get_reciprocity();
-        // // Vertex properties.
-        // std::map<std::string, double> get_local_reciprocity();
+      // // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+      // // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+      // // Convert to python.
+      // public:
+      //   // Graph properties.
+      //   int get_nb_vertices();
+      //   int get_nb_edges();
+      //   int get_nb_reciprocal_edges();
+      //   double get_reciprocity();
+      //   // // Vertex properties.
+      //   // std::map<std::string, double> get_local_reciprocity();
   };
 }
 
