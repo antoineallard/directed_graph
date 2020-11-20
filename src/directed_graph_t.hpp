@@ -52,7 +52,7 @@
 
 
 
-namespace agl
+namespace pgl
 {
   class directed_graph_t
   {
@@ -200,7 +200,7 @@ namespace agl
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-void agl::directed_graph_t::initialization()
+void pgl::directed_graph_t::initialization()
 {
   // Available vertex properties.
   available_vertex_prop.insert("in-degree");
@@ -273,7 +273,7 @@ struct compare_names_directed_graph_t
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-void agl::directed_graph_t::build_adjacency_list()
+void pgl::directed_graph_t::build_adjacency_list()
 {
   // ===============================================================================================
   // Initializes relevant objects of the class.
@@ -300,7 +300,7 @@ void agl::directed_graph_t::build_adjacency_list()
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-void agl::directed_graph_t::build_ID2Name()
+void pgl::directed_graph_t::build_ID2Name()
 {
   // ===============================================================================================
   // Initializes relevant objects of the class.
@@ -335,7 +335,7 @@ void agl::directed_graph_t::build_ID2Name()
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-bool agl::directed_graph_t::is_edge(int v_source, int v_target)
+bool pgl::directed_graph_t::is_edge(int v_source, int v_target)
 {
   return std::find(adjacency_list[v_source][OutDegreeIdx].begin(),
                    adjacency_list[v_source][OutDegreeIdx].end(),
@@ -345,7 +345,7 @@ bool agl::directed_graph_t::is_edge(int v_source, int v_target)
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-int agl::directed_graph_t::add_vertex(std::string name_str, bool ignore_unknown_vertices)
+int pgl::directed_graph_t::add_vertex(std::string name_str, bool ignore_unknown_vertices)
 {
   // Numerical ID of the vertex.
   int v;
@@ -376,7 +376,7 @@ int agl::directed_graph_t::add_vertex(std::string name_str, bool ignore_unknown_
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-bool agl::directed_graph_t::add_edge(std::string name1_str, std::string name2_str, bool ignore_unknown_vertices)
+bool pgl::directed_graph_t::add_edge(std::string name1_str, std::string name2_str, bool ignore_unknown_vertices)
 {
   // Ignores self-loops.
   if(name1_str == name2_str)
@@ -416,7 +416,7 @@ bool agl::directed_graph_t::add_edge(std::string name1_str, std::string name2_st
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-bool agl::directed_graph_t::add_edge(int v1, int v2)
+bool pgl::directed_graph_t::add_edge(int v1, int v2)
 {
   // Ignores self-loops.
   if(v1 == v2)
@@ -459,7 +459,7 @@ bool agl::directed_graph_t::add_edge(int v1, int v2)
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-bool agl::directed_graph_t::is_vertex_integer_property(std::string prop, bool exit_on_error)
+bool pgl::directed_graph_t::is_vertex_integer_property(std::string prop, bool exit_on_error)
 {
   bool is_not = available_vertex_integer_prop.find(prop) == available_vertex_integer_prop.end();
   if(exit_on_error)
@@ -476,7 +476,7 @@ bool agl::directed_graph_t::is_vertex_integer_property(std::string prop, bool ex
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-void agl::directed_graph_t::is_vertex_property(std::string prop)
+void pgl::directed_graph_t::is_vertex_property(std::string prop)
 {
   if(available_vertex_prop.find(prop) == available_vertex_prop.end())
   {
@@ -488,7 +488,7 @@ void agl::directed_graph_t::is_vertex_property(std::string prop)
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-void agl::directed_graph_t::add_new_vertex_integer_property(std::string prop, std::string prop_header)
+void pgl::directed_graph_t::add_new_vertex_integer_property(std::string prop, std::string prop_header)
 {
   add_new_vertex_property(prop, prop_header);
   if(available_vertex_integer_prop.find(prop) != available_vertex_integer_prop.end())
@@ -502,7 +502,7 @@ void agl::directed_graph_t::add_new_vertex_integer_property(std::string prop, st
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-void agl::directed_graph_t::add_new_vertex_property(std::string prop, std::string prop_header)
+void pgl::directed_graph_t::add_new_vertex_property(std::string prop, std::string prop_header)
 {
   if(prop_header == "")
   {
@@ -534,7 +534,7 @@ void agl::directed_graph_t::add_new_vertex_property(std::string prop, std::strin
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-void agl::directed_graph_t::compute_average_vertex_prop(std::string prop)
+void pgl::directed_graph_t::compute_average_vertex_prop(std::string prop)
 {
   // ===============================================================================================
   // Initializes relevant objects of the class.
@@ -579,7 +579,7 @@ void agl::directed_graph_t::compute_average_vertex_prop(std::string prop)
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-void agl::directed_graph_t::load_graph_from_edgelist_file(std::string edgelist_filename)
+void pgl::directed_graph_t::load_graph_from_edgelist_file(std::string edgelist_filename)
 {
   // ===============================================================================================
   // Initializes relevant objects of the class.
@@ -635,7 +635,7 @@ void agl::directed_graph_t::load_graph_from_edgelist_file(std::string edgelist_f
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-void agl::directed_graph_t::load_vertices_properties(std::string prop_filename, int usecol, std::string prop, std::string prop_header, bool ignore_unknown_vertices)
+void pgl::directed_graph_t::load_vertices_properties(std::string prop_filename, int usecol, std::string prop, std::string prop_header, bool ignore_unknown_vertices)
 {
   // ===============================================================================================
   // Initializes relevant objects of the class.
@@ -728,7 +728,7 @@ void agl::directed_graph_t::load_vertices_properties(std::string prop_filename, 
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-void agl::directed_graph_t::save_vertices_properties(std::string filename, std::vector<std::string> props_id, vID_t vID, int width, bool header)
+void pgl::directed_graph_t::save_vertices_properties(std::string filename, std::vector<std::string> props_id, vID_t vID, int width, bool header)
 {
   // Stream objects.
   std::fstream output_file;
@@ -850,7 +850,7 @@ void agl::directed_graph_t::save_vertices_properties(std::string filename, std::
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-void agl::directed_graph_t::compute_degrees()
+void pgl::directed_graph_t::compute_degrees()
 {
   // ===============================================================================================
   // Initializes relevant objects of the class.
@@ -920,7 +920,7 @@ void agl::directed_graph_t::compute_degrees()
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-void agl::directed_graph_t::compute_density()
+void pgl::directed_graph_t::compute_density()
 {
   g_prop["density"] = g_prop["nb_edges"] / (g_prop["nb_vertices"] * (g_prop["nb_vertices"] - 1));
 }
@@ -928,7 +928,7 @@ void agl::directed_graph_t::compute_density()
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-void agl::directed_graph_t::compute_reciprocity()
+void pgl::directed_graph_t::compute_reciprocity()
 {
   // ===============================================================================================
   // Initializes relevant objects of the class.
@@ -1009,7 +1009,7 @@ void agl::directed_graph_t::compute_reciprocity()
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-void agl::directed_graph_t::survey_triangles(bool build_triangle_list, bool compute_undirected_local_clustering)
+void pgl::directed_graph_t::survey_triangles(bool build_triangle_list, bool compute_undirected_local_clustering)
 {
   // ===============================================================================================
   // Initializes relevant objects of the class.
@@ -1150,7 +1150,7 @@ void agl::directed_graph_t::survey_triangles(bool build_triangle_list, bool comp
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-void agl::directed_graph_t::compile_triangle_spectrum()
+void pgl::directed_graph_t::compile_triangle_spectrum()
 {
   // ===============================================================================================
   // Initializes relevant objects of the class.
@@ -1257,7 +1257,7 @@ void agl::directed_graph_t::compile_triangle_spectrum()
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-int agl::directed_graph_t::get_nb_edges()
+int pgl::directed_graph_t::get_nb_edges()
 {
   return g_prop["nb_edges"];
 }
@@ -1265,7 +1265,7 @@ int agl::directed_graph_t::get_nb_edges()
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-int agl::directed_graph_t::get_nb_vertices()
+int pgl::directed_graph_t::get_nb_vertices()
 {
   return g_prop["nb_vertices"];
 }
@@ -1273,7 +1273,7 @@ int agl::directed_graph_t::get_nb_vertices()
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-int agl::directed_graph_t::get_nb_reciprocal_edges()
+int pgl::directed_graph_t::get_nb_reciprocal_edges()
 {
   if(g_prop["nb_reciprocal_edges"] == -1)
   {
@@ -1285,7 +1285,7 @@ int agl::directed_graph_t::get_nb_reciprocal_edges()
 
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-double agl::directed_graph_t::get_reciprocity()
+double pgl::directed_graph_t::get_reciprocity()
 {
   if(g_prop["reciprocity"] == -1)
   {
@@ -1305,7 +1305,7 @@ double agl::directed_graph_t::get_reciprocity()
 //
 // // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 // // =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-// std::map<std::string, double> agl::directed_graph_t::get_local_reciprocity()
+// std::map<std::string, double> pgl::directed_graph_t::get_local_reciprocity()
 // {
 //   // ===============================================================================================
 //   // Initializes relevant objects of the class.
