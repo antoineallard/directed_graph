@@ -98,6 +98,11 @@ g.degrees();
 //  objects.
 std::vector<double>& Vertex2InDegree = g.v_prop["in-degree"];
 std::vector<double>& Vertex2OutDegree = g.v_prop["out-degree"];
+// It also activates the graph property (g_prop) keywords containing the number
+//   of vertices with degree equal to 0 and degree equal to 1.
+int nb_vertices_deg_0 = g_prop["nb_vertices_undir_deg_0"]
+int nb_vertices_deg_1 = g_prop["nb_vertices_undir_deg_1"]
+
 
 // The joint in-/out-degree distribution can be written into a text file via
 std::string p[] = {"in-degree", "out-degree"};
@@ -144,9 +149,18 @@ g.survey_triangles();
 // Doing so activates the graph property keyword "nb_triangles"
 int nb_triangles = g.g_prop["nb_triangles"];
 
-// The list of triangles is a  of dimensions
+// The list of triangles is a std::vector< std::vector<int> > with dimensions
 //   nb_triangles x 3. It can be accessed via
 std::vector< std::vector<int> >& list_of_triangles = g.triangles;
+// Creating this list can be skipped by calling instead
+g.survey_triangles(false);
+
+// Calling survey_triangles() also computes various properties related to the
+//   clustering of the undirected version of the graph. The graph properties are
+int total_nb_triplets = g_prop["total_nb_triplets"];      // Number of triplets (three vertices connected by two edges)
+double undir_global_clust = g_prop["undir_global_clust"]  // Global clustering coefficient
+// as well as the vertex property (v_prop) keyword
+std::vector<double>& Vertex2UndirLocalClust = v_prop["undir_local_clust"];
 ```
 
 
