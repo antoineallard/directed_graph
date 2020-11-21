@@ -10,18 +10,21 @@ The class can be imported directly and is available under the namepace `pgl`.
 ```
 
 The currently available functionalities are
-* [Importing a graph from an edgelist file](#importing-a-graph-from-an-edgelist-file)
-* [Loading vertices properties](#loading-vertices-properties)
-* [Number of vertices and edges](#number-of-vertices-and-edges)
-* [In-degrees and out-degrees](#in-degrees-and-out-degrees)
-* [Reciprocity](#reciprocity)
-* [List of triangles](#list-of-triangles)
-* [Spectrum of unique triangle configurations](#spectrum-of-unique-triangle-configurations)
+* Input/output
+  * [Importing a graph from an edgelist file](#importing-a-graph-from-an-edgelist-file)
+  * [Loading vertices properties](#loading-vertices-properties)
+* Properties of the graph
+  * [Number of vertices and edges](#number-of-vertices-and-edges)
+  * [In-degrees and out-degrees](#in-degrees-and-out-degrees)
+  * [Reciprocity](#reciprocity)
+  * [Average vertex property](#average-vertex-property)
+  * [List of triangles](#list-of-triangles)
+  * [Spectrum of unique triangle configurations](#spectrum-of-unique-triangle-configurations)
 
 Note that further examples on how to use `directed_graph_t` are also provided in a notebook (see also related scripts in `validation/`) used to validate the class.
 
 
-#### Importing a graph from an edgelist file
+### Importing a graph from an edgelist file
 
 A graph can be imported from a file containing its edgelist (one edge per line). The edgelist file consists in a simple text file with the following convention
 
@@ -47,7 +50,7 @@ pgl::directed_graph_t g("<path-to-edgelist-file>");
 ```
 
 
-#### Loading vertices properties
+### Loading vertices properties
 
 Vertex properties can be loaded from a text file in order to be used by the code (one vertex per line). These text file must follow the following convention
 
@@ -76,7 +79,7 @@ g.load_vertices_properties("<path-to-file>",   // name of the property file to r
 ```
 
 
-#### Number of vertices and edges
+### Number of vertices and edges
 
 ```c++
 // The number of vertices/edges in the graph are accessible via
@@ -87,7 +90,7 @@ double density = g.g_prop["density"]
 ```
 
 
-#### In-degrees and out-degrees
+### In-degrees and out-degrees
 
 ```c++
 // Computes the in-/out-degree of vertices.
@@ -121,24 +124,44 @@ g.save_vertices_properties("<output_filename>",                // name of the fi
 ```
 
 
-#### Reciprocity
+### Reciprocity
 
 ```c++
 // Computes the number of reciprocal edges and the reciprocity coefficient
-//   (the latter is returned by the function).  An edge is reciprocal is an
-//   edge running in the opposite direction exists. There is therefore an even
+//   (the latter is returned by the function).  An edge is reciprocal if an
+//   edge running in the opposite direction also exists. There is therefore an even
 //   number of reciprocal edges. The reciprocity coefficient is defined as the
-//   fraction of edges that are reciprocal.
-double reciprocity = g.reciprocity();
+//   fraction of edges that are reciprocal (defined between 0 and 1).
+double reciprocity_ratio = g.reciprocity();
 
 // Calling this function activates the g_prop keywords "nb_reciprocal_edges"
-//   and "reciprocity".
+//   and "reciprocity_ratio".
 int nb_reciprocal_edges = g.g_prop["nb_reciprocal_edges"];
-reciprocity = g.g_prop["reciprocity"];
+reciprocity_ratio = g.g_prop["reciprocity_ratio"];
+double reciprocity_stat = g_prop["reciprocity_stat"];                           // Statistical definition of reciprocity that takes into account random reciprocity [Garlaschelli2004].
+// As well as the vertex property (v_prop) keywords
+std::vector<double>& Vertex2ReciprocalDegree = v_prop["reciprocal_degree"];     // Number of edges that are reciprocal (between 0 and min(k_in, k_out))
+std::vector<double>& Vertex2ReciprocityJaccard = v_prop["reciprocity_jaccard"]; // Jaccard coefficient between the set of in-neighbors and out-neighbors.
+std::vector<double>& Vertex2ReciprocityRatio = v_prop["reciprocity_ratio"];     // Local reciprocity ratio defined as the ratio of reciprocal edges a vertex has and the total number of edges it has (i.e. k_in + k_out).
+```
+[Garlaschelli2004] Garlaschelli, D., & Loffredo, M. I., Patterns of link reciprocity in directed networks, [Physical Review Letters, 93, 268701 (2004)](https://doi.org/10.1103/PhysRevLett.93.268701)
+
+
+### Average vertex property
+
+```c++
+// The average of any vertex property can be computed by calling
+//   compute_average_vertex_prop("<vertex_prop>") which activates the graph
+//   property (g_prop) keyword "avg_<vertex_prop>".
+g.compute_average_vertex_prop("in-degree");
+double avg_in_degree = g.g_prop["avg_in-degree"]
+
+g.compute_average_vertex_prop("out-degree");
+double avg_out_degree = g.g_prop["avg_out-degree"]
 ```
 
 
-#### List of triangles
+### List of triangles
 
 ```c++
 // Surveys the graph and builds a list of every triangles. In directed graphs,
@@ -167,7 +190,7 @@ g.survey_triangles(<true/false>, false);
 ```
 
 
-#### Spectrum of unique triangle configurations
+### Spectrum of unique triangle configurations
 
 ```c++
 // The number of each 7 unique triangle configurations is extracted via
