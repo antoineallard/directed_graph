@@ -161,6 +161,9 @@ int total_nb_triplets = g_prop["total_nb_triplets"];      // Number of triplets 
 double undir_global_clust = g_prop["undir_global_clust"]  // Global clustering coefficient
 // as well as the vertex property (v_prop) keyword
 std::vector<double>& Vertex2UndirLocalClust = v_prop["undir_local_clust"];
+// Calculating these values can be skipped by setting the second argument out
+//   survey_triangles() to false.
+g.survey_triangles(<true/false>, false);
 ```
 
 
